@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   before_save { organizer_name.downcase! }
   before_save { title.downcase! }
 
-  validates :organizer_name, presence: true, length: { maximum: 50 && minimum: 4 }
+  validates :organizer_name, presence: true, length: { maximum: 50, minimum: 4 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :organizer_email, presence: true, format: { with: VALID_EMAIL_REGEX }, 
                               uniqueness: { case_sensitive: false }
