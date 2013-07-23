@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+
   before_save { organizer_email.downcase! }
   before_save { organizer_name.downcase! }
   before_save { title.downcase! }

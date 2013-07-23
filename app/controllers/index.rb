@@ -9,9 +9,18 @@ get '/events/:id/show' do |id|
 end
 
 get '/events/new' do
-  #TODO IMPLEMENT ME
+  @event = Event.new
+
+  erb :event_new
 end
 
 post '/events/create' do
-  #TODO IMPLEMENT ME
+  params[:event][:date].gsub!(/(\d{2}).+(\d{2}).+(\d{4})/, "\\3-\\1-\\2")
+  if @event.errors.full_messages.empty? 
+    @event = Event.create(params[:event]) 
+    redirect '/'
+  else
+    flash[:error] = @event.errors.full_messages unless @event.nil?
+    redirect '/'
+  end
 end
