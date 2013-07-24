@@ -1,27 +1,17 @@
 <!doctype html>
 <html lang="en">
 <h1>Create a new Event</h1>
-<%= @event.errors.full_messages unless @event.errors.full_messages.empty? %>
-<form action="/events/create" method="post">
-  <input id="event_title" name="event[title]" type="text" value="<%= @event.title %>" placeholder="event title" required/>
+<%= @errors unless @errors.empty? %>
+<form class="myForm" action="/events/create" method="post">
+  <input id="event_title" name="event[title]" type="text" value="<%= @event.title %>" placeholder="event title"/><span id='title_validation'> required</span>
   <br>
+  <input name="event[date]" type="text" id="datepicker" value="<%= @event.date %>" placeholder="event date"/><span id='date_validation'> required</span>
   <br>
-  <input name="event[date]" type="text" id="datepicker" value="<%= @event.date %>" placeholder="event date" required/>
+  <input id="event_organizer_name" name="event[organizer_name]" type="text" value="<%= @event.organizer_name %>" placeholder="event organizer name"/><span id='name_validation'> needs at least 4 characters</span>
   <br>
-  <br>
-  <input id="event_organizer_name" name="event[organizer_name]" type="text" value="<%= @event.organizer_name %>" placeholder="event organizer name" required/>
-  <br>
-  <br>
-  <input id="event_organizer_email" name="event[organizer_email]" type="email" value="<%= @event.organizer_email %>" placeholder="event organizer email" required/>
-  <br>
+  <input id="event_organizer_email" name="event[organizer_email]" type="email" value="<%= @event.organizer_email %>" placeholder="event organizer email"/><span id='email_validation'> needs a valid email</span>
   <br>
   <input type="submit" value="Create event" />
   <br>
-  <br>
 </form> 
-<script>
-  $(function() {
-    $( "#datepicker" ).datepicker();
-  });
-</script>
 </html>
